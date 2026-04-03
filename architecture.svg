@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc"/>
+      <stop offset="100%" style="stop-color:#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="user" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="frontend" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#059669"/>
+    </linearGradient>
+    <linearGradient id="backend" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+    <linearGradient id="data" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="llm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ef4444"/>
+      <stop offset="100%" style="stop-color:#dc2626"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="700" fill="url(#bg)" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#1e293b">Course Companion FTE - Architecture</text>
+  <text x="450" y="62" text-anchor="middle" font-size="13" fill="#64748b">Phase 1: Zero-Backend-LLM | Phase 2: Hybrid Intelligence | Phase 3: Consolidated Web App</text>
+
+  <!-- User -->
+  <rect x="350" y="85" width="200" height="50" rx="8" fill="url(#user)" filter="url(#shadow)"/>
+  <text x="450" y="117" text-anchor="middle" font-size="16" font-weight="600" fill="white">Student / User</text>
+
+  <!-- Arrow User to Frontend -->
+  <line x1="450" y1="135" x2="450" y2="170" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Frontend Layer -->
+  <rect x="50" y="175" width="800" height="140" rx="12" fill="#f0fdf4" stroke="#22c55e" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="65" y="198" font-size="13" font-weight="600" fill="#166534">FRONTEND LAYER</text>
+
+  <!-- ChatGPT App -->
+  <rect x="80" y="210" width="250" height="90" rx="8" fill="url(#frontend)" filter="url(#shadow)"/>
+  <text x="205" y="240" text-anchor="middle" font-size="14" font-weight="600" fill="white">ChatGPT App</text>
+  <text x="205" y="260" text-anchor="middle" font-size="11" fill="#d1fae5">OpenAI Apps SDK</text>
+  <text x="205" y="278" text-anchor="middle" font-size="10" fill="#a7f3d0">LLM reasoning + skills</text>
+  <text x="205" y="293" text-anchor="middle" font-size="10" fill="#a7f3d0">Phase 1 &amp; 2</text>
+
+  <!-- Web App -->
+  <rect x="570" y="210" width="250" height="90" rx="8" fill="url(#frontend)" filter="url(#shadow)"/>
+  <text x="695" y="240" text-anchor="middle" font-size="14" font-weight="600" fill="white">Next.js Web App</text>
+  <text x="695" y="260" text-anchor="middle" font-size="11" fill="#d1fae5">React + Tailwind CSS</text>
+  <text x="695" y="278" text-anchor="middle" font-size="10" fill="#a7f3d0">Dashboard, quizzes, progress</text>
+  <text x="695" y="293" text-anchor="middle" font-size="10" fill="#a7f3d0">Phase 3</text>
+
+  <!-- Arrow Frontend to Backend -->
+  <line x1="450" y1="315" x2="450" y2="350" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="465" y="340" font-size="10" fill="#64748b">REST API</text>
+
+  <!-- Backend Layer -->
+  <rect x="50" y="355" width="800" height="180" rx="12" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="65" y="378" font-size="13" font-weight="600" fill="#92400e">BACKEND LAYER (FastAPI)</text>
+
+  <!-- Phase 1 APIs -->
+  <rect x="80" y="390" width="300" height="130" rx="8" fill="url(#backend)" filter="url(#shadow)"/>
+  <text x="230" y="415" text-anchor="middle" font-size="13" font-weight="600" fill="white">Phase 1: Zero-Backend-LLM</text>
+  <text x="230" y="435" text-anchor="middle" font-size="10" fill="#fef3c7">GET /chapters/ - Content delivery</text>
+  <text x="230" y="452" text-anchor="middle" font-size="10" fill="#fef3c7">GET /chapters/{id}/navigation</text>
+  <text x="230" y="469" text-anchor="middle" font-size="10" fill="#fef3c7">GET/POST /quizzes/ - Rule-based grading</text>
+  <text x="230" y="486" text-anchor="middle" font-size="10" fill="#fef3c7">GET/PUT /progress/ - Tracking</text>
+  <text x="230" y="503" text-anchor="middle" font-size="10" fill="#fef3c7">POST /access/check - Freemium gate</text>
+  <text x="230" y="520" text-anchor="middle" font-size="10" fill="#fef3c7">GET /search/ - Keyword search</text>
+
+  <!-- Phase 2 APIs -->
+  <rect x="520" y="390" width="300" height="130" rx="8" fill="url(#llm)" filter="url(#shadow)"/>
+  <text x="670" y="415" text-anchor="middle" font-size="13" font-weight="600" fill="white">Phase 2: Hybrid Intelligence</text>
+  <text x="670" y="440" text-anchor="middle" font-size="11" fill="#fecaca">Premium-gated only</text>
+  <text x="670" y="465" text-anchor="middle" font-size="10" fill="#fecaca">POST /hybrid/feature</text>
+  <text x="670" y="485" text-anchor="middle" font-size="10" fill="#fecaca">Adaptive Learning Path</text>
+  <text x="670" y="502" text-anchor="middle" font-size="10" fill="#fecaca">LLM-Graded Assessments</text>
+
+  <!-- Arrow Backend to Data -->
+  <line x1="450" y1="535" x2="450" y2="570" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Data Layer -->
+  <rect x="50" y="575" width="800" height="110" rx="12" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="65" y="598" font-size="13" font-weight="600" fill="#5b21b6">DATA LAYER</text>
+
+  <!-- SQLite/PostgreSQL -->
+  <rect x="80" y="608" width="200" height="60" rx="8" fill="url(#data)" filter="url(#shadow)"/>
+  <text x="180" y="633" text-anchor="middle" font-size="13" font-weight="600" fill="white">SQLite / PostgreSQL</text>
+  <text x="180" y="653" text-anchor="middle" font-size="10" fill="#ddd6fe">Users, Progress, Quizzes</text>
+
+  <!-- JSON Content -->
+  <rect x="350" y="608" width="200" height="60" rx="8" fill="url(#data)" filter="url(#shadow)"/>
+  <text x="450" y="633" text-anchor="middle" font-size="13" font-weight="600" fill="white">JSON Files (R2)</text>
+  <text x="450" y="653" text-anchor="middle" font-size="10" fill="#ddd6fe">Course content, quizzes</text>
+
+  <!-- Agent Skills -->
+  <rect x="620" y="608" width="200" height="60" rx="8" fill="url(#data)" filter="url(#shadow)"/>
+  <text x="720" y="633" text-anchor="middle" font-size="13" font-weight="600" fill="white">Agent Skills</text>
+  <text x="720" y="653" text-anchor="middle" font-size="10" fill="#ddd6fe">SKILL.md files (4 skills)</text>
+
+  <!-- LLM Connection (Phase 2 only) -->
+  <line x1="670" y1="520" x2="670" y2="555" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="685" y="548" font-size="9" fill="#ef4444">LLM API (Phase 2+)</text>
+
+  <!-- Legend -->
+  <rect x="50" y="690" width="15" height="10" rx="2" fill="#3b82f6"/>
+  <text x="70" y="699" font-size="9" fill="#475569">User</text>
+  <rect x="120" y="690" width="15" height="10" rx="2" fill="#10b981"/>
+  <text x="140" y="699" font-size="9" fill="#475569">Frontend</text>
+  <rect x="220" y="690" width="15" height="10" rx="2" fill="#f59e0b"/>
+  <text x="240" y="699" font-size="9" fill="#475569">Backend P1</text>
+  <rect x="330" y="690" width="15" height="10" rx="2" fill="#ef4444"/>
+  <text x="350" y="699" font-size="9" fill="#475569">Backend P2</text>
+  <rect x="440" y="690" width="15" height="10" rx="2" fill="#8b5cf6"/>
+  <text x="460" y="699" font-size="9" fill="#475569">Data</text>
+</svg>
