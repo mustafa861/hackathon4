@@ -1,0 +1,209 @@
+[
+  {
+    "quiz_id": "quiz_ch1",
+    "chapter_id": "ch1",
+    "title": "Introduction to AI Agents - Quiz",
+    "questions": [
+      {
+        "question": "What is the fundamental difference between AI agents and traditional software?",
+        "options": ["AI agents are faster", "AI agents can adapt their behavior based on new information", "AI agents use less memory", "AI agents are written in Python"],
+        "correct_answer": 1,
+        "explanation": "AI agents can perceive, decide, and adapt based on new information, unlike traditional programs that follow fixed instructions."
+      },
+      {
+        "question": "Which type of agent maintains internal state to handle partially observable environments?",
+        "options": ["Simple reflex agent", "Model-based agent", "Goal-based agent", "Utility-based agent"],
+        "correct_answer": 1,
+        "explanation": "Model-based agents maintain an internal state/model of the world to handle environments where not everything is directly observable."
+      },
+      {
+        "question": "What is the correct order of the agent loop?",
+        "options": ["Act, Decide, Perceive", "Decide, Perceive, Act", "Perceive, Decide, Act", "Perceive, Act, Decide"],
+        "correct_answer": 2,
+        "explanation": "The agent loop follows: Perceive (gather information), Decide (reason about action), Act (execute tools)."
+      },
+      {
+        "question": "How many hours per week can a Digital FTE work?",
+        "options": ["40 hours", "80 hours", "120 hours", "168 hours"],
+        "correct_answer": 3,
+        "explanation": "A Digital FTE works 24/7, which equals 168 hours per week (24 x 7)."
+      },
+      {
+        "question": "What is the approximate cost reduction of a Digital FTE compared to human tutoring?",
+        "options": ["50%", "75%", "90%", "99%"],
+        "correct_answer": 3,
+        "explanation": "Digital FTEs can reduce costs by approximately 99% compared to human tutoring ($0.25 vs $50+ per session)."
+      }
+    ],
+    "passing_score": 60.0,
+    "is_premium": false
+  },
+  {
+    "quiz_id": "quiz_ch2",
+    "chapter_id": "ch2",
+    "title": "Prompt Engineering Fundamentals - Quiz",
+    "questions": [
+      {
+        "question": "Which component is NOT part of a good prompt?",
+        "options": ["Clear role/persona", "Specific context", "Random examples", "Explicit instructions"],
+        "correct_answer": 2,
+        "explanation": "Examples should be relevant and purposeful, not random. A good prompt includes role, context, instructions, format, and relevant examples."
+      },
+      {
+        "question": "What is the role of a system prompt?",
+        "options": ["Request specific actions", "Set overall behavior and constraints", "Provide examples", "Generate responses"],
+        "correct_answer": 1,
+        "explanation": "System prompts act like a constitution - they define the overall behavior, role, tone, and boundaries for the AI."
+      },
+      {
+        "question": "How many examples are typically recommended for few-shot prompting?",
+        "options": ["1", "2-5", "10-20", "50+"],
+        "correct_answer": 1,
+        "explanation": "Few-shot prompting typically uses 2-5 examples to guide the model's behavior effectively."
+      },
+      {
+        "question": "What does chain of thought prompting improve?",
+        "options": ["Response speed", "Accuracy on complex tasks", "Token usage", "Language support"],
+        "correct_answer": 1,
+        "explanation": "Chain of thought prompting dramatically improves accuracy on complex reasoning tasks by encouraging step-by-step thinking."
+      }
+    ],
+    "passing_score": 75.0,
+    "is_premium": false
+  },
+  {
+    "quiz_id": "quiz_ch3",
+    "chapter_id": "ch3",
+    "title": "Agent Tools and Function Calling - Quiz",
+    "questions": [
+      {
+        "question": "What are agent tools?",
+        "options": ["Programming languages for agents", "External capabilities agents use to interact with the world", "UI components for agents", "Database systems for agents"],
+        "correct_answer": 1,
+        "explanation": "Tools are external capabilities (web search, code execution, API calls) that extend an agent's abilities beyond text generation."
+      },
+      {
+        "question": "What does function calling enable?",
+        "options": ["Faster responses", "Tool invocation by agents", "Better prompts", "More training data"],
+        "correct_answer": 1,
+        "explanation": "Function calling is the mechanism by which agents invoke tools - sending structured requests and receiving results."
+      },
+      {
+        "question": "What makes a good agent tool?",
+        "options": ["Does many things at once", "Is atomic and does one thing well", "Has no error handling", "Is complex to use"],
+        "correct_answer": 1,
+        "explanation": "Good tools are atomic (do one thing well), well-documented, and safe with proper input validation and error handling."
+      }
+    ],
+    "passing_score": 66.0,
+    "is_premium": false
+  },
+  {
+    "quiz_id": "quiz_ch4",
+    "chapter_id": "ch4",
+    "title": "RAG - Quiz",
+    "questions": [
+      {
+        "question": "What does RAG stand for?",
+        "options": ["Random Access Generation", "Retrieval Augmented Generation", "Rapid Agent Generation", "Robust Answer Generation"],
+        "correct_answer": 1,
+        "explanation": "RAG stands for Retrieval Augmented Generation - combining information retrieval with text generation."
+      },
+      {
+        "question": "What is the main benefit of RAG?",
+        "options": ["Faster responses", "Reduced hallucinations and use of proprietary data", "Lower costs", "Simpler architecture"],
+        "correct_answer": 1,
+        "explanation": "RAG reduces hallucinations and enables agents to work with proprietary or domain-specific data."
+      },
+      {
+        "question": "What is the correct RAG pipeline order?",
+        "options": ["Retrieve, Generate, Embed, Index", "Ingest, Embed, Index, Retrieve, Generate", "Generate, Retrieve, Embed, Index", "Index, Embed, Ingest, Retrieve, Generate"],
+        "correct_answer": 1,
+        "explanation": "The RAG pipeline: Ingest documents, Embed into vectors, Index in database, Retrieve relevant chunks, Generate responses."
+      }
+    ],
+    "passing_score": 66.0,
+    "is_premium": false
+  },
+  {
+    "quiz_id": "quiz_ch5",
+    "chapter_id": "ch5",
+    "title": "Agent Memory - Quiz",
+    "questions": [
+      {
+        "question": "Which type of memory tracks the current interaction?",
+        "options": ["Long-term memory", "Short-term memory", "Episodic memory", "Semantic memory"],
+        "correct_answer": 1,
+        "explanation": "Short-term memory (conversation history) tracks the current interaction."
+      },
+      {
+        "question": "Why is conversation history management important?",
+        "options": ["It makes the agent faster", "LLMs have context window limits", "It reduces costs", "It improves accuracy"],
+        "correct_answer": 1,
+        "explanation": "LLMs have context window limits, so managing what history to keep is crucial for maintaining relevant context."
+      },
+      {
+        "question": "What enables semantic recall in long-term memory?",
+        "options": ["SQL databases", "Vector databases", "File systems", "Cache systems"],
+        "correct_answer": 1,
+        "explanation": "Vector databases store embeddings that enable semantic search and recall of relevant past information."
+      }
+    ],
+    "passing_score": 66.0,
+    "is_premium": false
+  },
+  {
+    "quiz_id": "quiz_ch6",
+    "chapter_id": "ch6",
+    "title": "Multi-Agent Systems - Quiz",
+    "questions": [
+      {
+        "question": "What is a limitation of single agents that multi-agent systems overcome?",
+        "options": ["Single agents are too expensive", "Single agents can only do one thing at a time", "Single agents are slower", "Single agents can't use tools"],
+        "correct_answer": 1,
+        "explanation": "Single agents can only do one thing at a time and have limited context windows. Multi-agent systems enable parallel execution and specialization."
+      },
+      {
+        "question": "In which communication pattern does one agent transfer control to another?",
+        "options": ["Collaboration", "Debate", "Handoff", "Hierarchy"],
+        "correct_answer": 2,
+        "explanation": "Handoff is when one agent transfers control to another agent."
+      },
+      {
+        "question": "What does A2A protocol standardize?",
+        "options": ["AI training methods", "Agent-to-agent communication", "API design", "Database schemas"],
+        "correct_answer": 1,
+        "explanation": "A2A (Agent-to-Agent) protocol standardizes how agents communicate and collaborate."
+      }
+    ],
+    "passing_score": 66.0,
+    "is_premium": true
+  },
+  {
+    "quiz_id": "quiz_ch7",
+    "chapter_id": "ch7",
+    "title": "MCP Protocol - Quiz",
+    "questions": [
+      {
+        "question": "What does MCP stand for?",
+        "options": ["Machine Control Protocol", "Model Context Protocol", "Multi-Channel Processing", "Memory Cache Protocol"],
+        "correct_answer": 1,
+        "explanation": "MCP stands for Model Context Protocol - an open standard for connecting AI models to external data and tools."
+      },
+      {
+        "question": "What architecture does MCP follow?",
+        "options": ["Peer-to-peer", "Client-server", "Event-driven", "Microservices"],
+        "correct_answer": 1,
+        "explanation": "MCP follows a client-server architecture where the MCP client runs in the agent and MCP servers expose capabilities."
+      },
+      {
+        "question": "What can MCP servers expose?",
+        "options": ["Only data", "Only tools", "Resources, tools, and prompts", "Only prompts"],
+        "correct_answer": 2,
+        "explanation": "MCP servers can expose resources (data sources), tools (actions), and prompts (templates)."
+      }
+    ],
+    "passing_score": 66.0,
+    "is_premium": true
+  }
+]

@@ -1,0 +1,326 @@
+[
+  {
+    "chapter_id": "ch1",
+    "title": "Introduction to AI Agents",
+    "description": "Understand what AI agents are, their capabilities, and how they differ from traditional software.",
+    "content": [
+      {
+        "section": "What is an AI Agent?",
+        "text": "An AI agent is a software system that uses artificial intelligence to perceive its environment, make decisions, and take actions to achieve specific goals. Unlike traditional programs that follow fixed instructions, AI agents can adapt their behavior based on new information and changing circumstances. AI agents combine large language models (LLMs) with tools, memory, and planning capabilities to perform complex tasks autonomously or semi-autonomously.",
+        "key_points": ["AI agents perceive, decide, and act", "They adapt based on new information", "They combine LLMs with tools and memory", "They can work autonomously or with human guidance"]
+      },
+      {
+        "section": "Types of AI Agents",
+        "text": "AI agents can be classified into several categories based on their capabilities. Simple reflex agents respond directly to perceptions. Model-based agents maintain internal state to handle partially observable environments. Goal-based agents act to achieve specific objectives. Utility-based agents maximize their expected utility. Learning agents improve their performance over time through experience. In the context of software development, we primarily work with goal-based and utility-based agents that can use tools and maintain context across interactions.",
+        "key_points": ["Simple reflex agents react to perceptions", "Model-based agents maintain internal state", "Goal-based agents pursue objectives", "Learning agents improve over time"]
+      },
+      {
+        "section": "The Agent Loop",
+        "text": "The fundamental pattern of AI agents follows a perception-decision-action loop. First, the agent perceives its environment through inputs (user messages, API responses, file contents). Then it reasons about what action to take using its LLM brain. Finally, it executes actions through tools (API calls, file operations, code execution). This loop continues until the goal is achieved or the agent determines it cannot proceed. Understanding this loop is crucial for designing effective agents.",
+        "code_examples": [
+          {"language": "python", "code": "# Simplified agent loop\nwhile not goal_achieved:\n    observation = perceive_environment()\n    decision = llm_reason(observation, context)\n    action = execute_tool(decision)\n    context.update(observation, decision, action)"}
+        ],
+        "key_points": ["Perceive: Gather information from environment", "Decide: Use LLM to reason about next action", "Act: Execute tools to change environment", "Loop: Continue until goal is reached"]
+      },
+      {
+        "section": "Why Agents Matter",
+        "text": "AI agents represent a paradigm shift in how we build software. Instead of writing explicit instructions for every scenario, we define goals and constraints, then let the agent figure out how to achieve them. This enables building systems that can handle novel situations, learn from experience, and scale to complex multi-step workflows. Agents are transforming industries from customer service to software development, research, and education.",
+        "key_points": ["Agents handle novel situations", "They scale to complex workflows", "They reduce need for explicit programming", "They transform how we build software"]
+      }
+    ],
+    "order": 1,
+    "is_premium": false,
+    "prerequisites": []
+  },
+  {
+    "chapter_id": "ch2",
+    "title": "Prompt Engineering Fundamentals",
+    "description": "Master the art of crafting effective prompts to get the best results from language models.",
+    "content": [
+      {
+        "section": "The Anatomy of a Good Prompt",
+        "text": "A well-crafted prompt includes several key components: a clear role or persona for the AI, specific context about the task, explicit instructions on what to do, constraints on the output format, and examples of desired behavior. The more precise and structured your prompt, the more reliable and consistent the AI's responses will be. Think of prompting as programming with natural language - precision matters.",
+        "key_points": ["Define a clear role/persona", "Provide specific context", "Give explicit instructions", "Specify output format", "Include examples when possible"]
+      },
+      {
+        "section": "System Prompts vs User Prompts",
+        "text": "System prompts set the overall behavior and constraints for the AI. They define the agent's role, tone, and boundaries. User prompts are the specific requests or questions within a conversation. The system prompt acts like a constitution - it governs all behavior. User prompts are like specific laws - they request particular actions. Understanding this distinction is crucial for building agents that behave consistently.",
+        "code_examples": [
+          {"language": "python", "code": "system_prompt = \"\"\"You are an expert Python developer.\n- Always follow PEP 8 style guide\n- Include type hints\n- Add docstrings to functions\n- Prefer list comprehensions over loops\"\"\"\n\nuser_prompt = \"Write a function to sort a list of dictionaries by a key\""}
+        ],
+        "key_points": ["System prompts define overall behavior", "User prompts request specific actions", "System prompts are persistent constraints", "User prompts are task-specific requests"]
+      },
+      {
+        "section": "Few-Shot Prompting",
+        "text": "Few-shot prompting involves providing examples of input-output pairs within the prompt to guide the model's behavior. This technique is particularly effective for tasks that require specific formatting, reasoning patterns, or domain-specific responses. By showing the model 2-5 examples of the desired behavior, you can significantly improve output quality and consistency without any model fine-tuning.",
+        "code_examples": [
+          {"language": "python", "code": "prompt = \"\"\"Classify the sentiment of these reviews:\n\nReview: \"The product exceeded my expectations!\"\nSentiment: Positive\n\nReview: \"It broke after one day of use.\"\nSentiment: Negative\n\nReview: \"It works okay, nothing special.\"\nSentiment: Neutral\n\nReview: \"Absolutely love this purchase!\"\nSentiment:\"\"\""}
+        ],
+        "key_points": ["Provide 2-5 input-output examples", "Examples should cover edge cases", "Format examples consistently", "More examples = better performance"]
+      },
+      {
+        "section": "Chain of Thought Prompting",
+        "text": "Chain of thought prompting encourages the model to think through problems step by step before providing an answer. This is especially useful for complex reasoning tasks, math problems, or multi-step analysis. By asking the model to 'think step by step' or providing reasoning examples, you can dramatically improve accuracy on complex tasks. This technique mirrors how humans solve difficult problems.",
+        "key_points": ["Ask model to think step by step", "Improves accuracy on complex tasks", "Reduces hallucination", "Makes reasoning transparent"]
+      }
+    ],
+    "order": 2,
+    "is_premium": false,
+    "prerequisites": ["ch1"]
+  },
+  {
+    "chapter_id": "ch3",
+    "title": "Agent Tools and Function Calling",
+    "description": "Learn how to give agents the ability to use external tools and APIs to accomplish tasks.",
+    "content": [
+      {
+        "section": "What Are Agent Tools?",
+        "text": "Tools are external capabilities that agents can use to interact with the world beyond text generation. These include web search, code execution, file operations, API calls, database queries, and more. Tools extend an agent's capabilities from mere text generation to actual action-taking. Each tool has a name, description, input schema, and implementation. The agent decides which tool to use based on the current task and context.",
+        "key_points": ["Tools extend agent capabilities beyond text", "Each tool has a name, description, and schema", "Agents decide which tools to use", "Tools enable real-world actions"]
+      },
+      {
+        "section": "Function Calling",
+        "text": "Function calling is the mechanism by which agents invoke tools. The agent sends a structured request specifying which function to call and with what arguments. The system executes the function and returns the result to the agent, which then incorporates this information into its reasoning. This creates a powerful loop where the agent can gather information, perform computations, and take actions as needed.",
+        "code_examples": [
+          {"language": "python", "code": "from openai import OpenAI\n\nclient = OpenAI()\n\ntools = [{\n    \"type\": \"function\",\n    \"function\": {\n        \"name\": \"get_weather\",\n        \"description\": \"Get current weather for a location\",\n        \"parameters\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"location\": {\"type\": \"string\"},\n                \"unit\": {\"type\": \"string\", \"enum\": [\"celsius\", \"fahrenheit\"]}\n            },\n            \"required\": [\"location\"]\n        }\n    }\n}]\n\nresponse = client.chat.completions.create(\n    model=\"gpt-4\",\n    messages=[{\"role\": \"user\", \"content\": \"What's the weather in London?\"}],\n    tools=tools\n)"}
+        ],
+        "key_points": ["Function calling enables tool use", "Tools have structured schemas", "Results feed back into agent reasoning", "Creates perception-action loop"]
+      },
+      {
+        "section": "Building Custom Tools",
+        "text": "Creating custom tools involves defining the tool's interface (name, description, parameters) and implementing its behavior. Good tools are atomic (do one thing well), well-documented (clear descriptions and schemas), and safe (validate inputs, handle errors gracefully). When building tools for agents, think about what information or actions the agent needs to accomplish its goals, then create tools that provide those capabilities reliably.",
+        "code_examples": [
+          {"language": "python", "code": "def search_documentation(query: str, max_results: int = 5) -> str:\n    \"\"\"Search the API documentation for relevant information.\n    \n    Args:\n        query: The search query\n        max_results: Maximum number of results to return\n    \n    Returns:\n        Formatted search results with relevant excerpts\n    \"\"\"\n    results = doc_index.search(query, limit=max_results)\n    return format_results(results)"}
+        ],
+        "key_points": ["Tools should be atomic and focused", "Write clear descriptions and schemas", "Validate inputs and handle errors", "Design tools around agent needs"]
+      },
+      {
+        "section": "Tool Selection Strategies",
+        "text": "As agents gain access to more tools, selecting the right tool becomes a challenge. Strategies include: providing clear tool descriptions so the agent can make informed choices, organizing tools into categories, limiting the number of tools available at any time, and using hierarchical tool selection where the agent first chooses a category, then a specific tool. The key is to make tool selection easy for the agent while maintaining powerful capabilities.",
+        "key_points": ["Clear descriptions aid selection", "Organize tools into categories", "Limit tools to reduce confusion", "Use hierarchical selection for many tools"]
+      }
+    ],
+    "order": 3,
+    "is_premium": false,
+    "prerequisites": ["ch1", "ch2"]
+  },
+  {
+    "chapter_id": "ch4",
+    "title": "Retrieval Augmented Generation (RAG)",
+    "description": "Learn how to ground AI agents in your own data using retrieval augmented generation.",
+    "content": [
+      {
+        "section": "What is RAG?",
+        "text": "Retrieval Augmented Generation (RAG) is a technique that combines information retrieval with text generation. Instead of relying solely on the model's training data, RAG first retrieves relevant information from a knowledge base, then uses that information to generate responses. This approach reduces hallucinations, enables answers based on up-to-date information, and allows agents to work with proprietary or domain-specific data.",
+        "key_points": ["RAG combines retrieval with generation", "Reduces hallucinations", "Enables use of proprietary data", "Provides up-to-date information"]
+      },
+      {
+        "section": "The RAG Pipeline",
+        "text": "A RAG pipeline consists of several stages: Document ingestion (loading and chunking documents), Embedding (converting text chunks to vector representations), Indexing (storing vectors in a searchable database), Retrieval (finding relevant chunks for a query), and Generation (using retrieved chunks to generate responses). Each stage has design choices that affect the quality and performance of the system.",
+        "code_examples": [
+          {"language": "python", "code": "# Simplified RAG pipeline\nfrom langchain.vectorstores import Chroma\nfrom langchain.embeddings import OpenAIEmbeddings\n\n# 1. Ingest and chunk\ndocuments = load_documents(\"docs/\")\nchunks = split_documents(documents, chunk_size=1000)\n\n# 2. Embed and index\nembeddings = OpenAIEmbeddings()\nvectorstore = Chroma.from_documents(chunks, embeddings)\n\n# 3. Retrieve and generate\nquery = \"How do I use function calling?\"\nrelevant_docs = vectorstore.similarity_search(query, k=3)\ncontext = \"\\n\".join([doc.page_content for doc in relevant_docs])\nresponse = generate_with_context(query, context)"}
+        ],
+        "key_points": ["Ingest: Load and chunk documents", "Embed: Convert to vector representations", "Index: Store in searchable database", "Retrieve: Find relevant chunks", "Generate: Use context for responses"]
+      },
+      {
+        "section": "Chunking Strategies",
+        "text": "How you split documents into chunks significantly impacts retrieval quality. Fixed-size chunking is simple but may cut through important context. Semantic chunking splits at natural boundaries like paragraphs or sections. Overlapping chunks preserve context across boundaries. The optimal strategy depends on your content type and query patterns. For code documentation, chunk by function or class. For articles, chunk by section or paragraph.",
+        "key_points": ["Fixed-size: Simple but may cut context", "Semantic: Split at natural boundaries", "Overlapping: Preserve context across chunks", "Choose strategy based on content type"]
+      },
+      {
+        "section": "Embedding Models",
+        "text": "Embedding models convert text into dense vector representations that capture semantic meaning. Similar concepts have similar vectors, enabling semantic search. Popular embedding models include OpenAI's text-embedding-ada-002, Cohere's embed models, and open-source options like sentence-transformers. When choosing an embedding model, consider dimensionality, context window, language support, and cost. The embedding model is a critical component that directly affects retrieval quality.",
+        "key_points": ["Embeddings capture semantic meaning", "Similar concepts have similar vectors", "Choose based on your requirements", "Critical for retrieval quality"]
+      }
+    ],
+    "order": 4,
+    "is_premium": false,
+    "prerequisites": ["ch1", "ch2", "ch3"]
+  },
+  {
+    "chapter_id": "ch5",
+    "title": "Agent Memory and Context Management",
+    "description": "Understand how agents maintain context across conversations and learn from interactions.",
+    "content": [
+      {
+        "section": "Types of Agent Memory",
+        "text": "Agents use different types of memory to maintain context. Short-term memory (conversation history) tracks the current interaction. Long-term memory stores information across sessions for personalization. Working memory holds intermediate results during complex reasoning. Episodic memory records specific events and interactions. Semantic memory stores facts and knowledge. Effective agents combine these memory types to provide coherent, personalized experiences.",
+        "key_points": ["Short-term: Current conversation", "Long-term: Cross-session information", "Working: Intermediate reasoning results", "Episodic: Specific events", "Semantic: Facts and knowledge"]
+      },
+      {
+        "section": "Conversation History Management",
+        "text": "Managing conversation history is crucial because LLMs have context window limits. Strategies include: keeping the full history within window limits, summarizing older conversations, keeping only recent messages plus a summary, or using a sliding window of recent messages. The choice affects both cost and quality. For tutoring applications, keeping key learning moments and progress indicators in the context is important.",
+        "code_examples": [
+          {"language": "python", "code": "# Conversation history management\nclass ConversationMemory:\n    def __init__(self, max_tokens=4000):\n        self.messages = []\n        self.max_tokens = max_tokens\n        self.summary = \"\"\n    \n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n        self._trim_if_needed()\n    \n    def _trim_if_needed):\n        while self._token_count() > self.max_tokens:\n            if len(self.messages) > 4:\n                old = self.messages.pop(1)\n                self.summary += f\"\\n{old['content']}\"\n            else:\n                break"}
+        ],
+        "key_points": ["Context windows have limits", "Summarize older conversations", "Keep key information in context", "Balance cost and quality"]
+      },
+      {
+        "section": "Vector Memory for Long-Term Storage",
+        "text": "For long-term memory, vector databases store embeddings of important information that can be retrieved semantically. When the agent needs to recall something, it embeds the current context and searches for similar stored memories. This enables the agent to 'remember' relevant past interactions, user preferences, and learned facts without keeping everything in the conversation window.",
+        "key_points": ["Vector DBs enable semantic recall", "Store important information as embeddings", "Retrieve based on current context", "Enables cross-session personalization"]
+      },
+      {
+        "section": "Memory in Educational Agents",
+        "text": "For educational agents like our Course Companion, memory serves specific purposes: tracking what the student has learned, remembering areas of difficulty, maintaining learning progress, and personalizing explanations based on past interactions. The agent should remember which concepts the student struggled with and adjust future explanations accordingly. This creates a truly personalized learning experience.",
+        "key_points": ["Track learned concepts", "Remember difficulty areas", "Maintain learning progress", "Personalize based on history"]
+      }
+    ],
+    "order": 5,
+    "is_premium": false,
+    "prerequisites": ["ch1", "ch2", "ch3", "ch4"]
+  },
+  {
+    "chapter_id": "ch6",
+    "title": "Multi-Agent Systems",
+    "description": "Learn how multiple agents can collaborate to solve complex problems.",
+    "content": [
+      {
+        "section": "Why Multi-Agent?",
+        "text": "Single agents have limitations: they can only do one thing at a time, have limited context windows, and may struggle with complex multi-domain tasks. Multi-agent systems overcome these by dividing work among specialized agents, enabling parallel execution, providing redundancy, and allowing each agent to focus on its area of expertise. This mirrors how human teams work - specialists collaborating toward a common goal.",
+        "key_points": ["Overcome single-agent limitations", "Enable parallel execution", "Provide redundancy", "Allow specialization"]
+      },
+      {
+        "section": "Agent Communication Patterns",
+        "text": "Agents can communicate in several patterns: Handoff (one agent transfers control to another), Collaboration (agents work together on a task), Debate (agents discuss and critique each other's work), and Hierarchy (a manager agent delegates to worker agents). The pattern choice depends on the task complexity, required expertise, and desired output quality. For educational applications, a tutor agent might hand off to a quiz agent for assessments.",
+        "key_points": ["Handoff: Transfer control", "Collaboration: Work together", "Debate: Critique and improve", "Hierarchy: Manager delegates"]
+      },
+      {
+        "section": "The A2A Protocol",
+        "text": "Agent-to-Agent (A2A) protocol standardizes how agents communicate and collaborate. It defines message formats, handoff procedures, and collaboration patterns. With A2A, agents from different teams or organizations can work together seamlessly. This is crucial for building ecosystems where specialized agents (tutor, quiz master, progress tracker) can collaborate to provide comprehensive educational experiences.",
+        "key_points": ["Standardizes agent communication", "Defines message formats", "Enables cross-team collaboration", "Supports educational ecosystems"]
+      },
+      {
+        "section": "Building a Multi-Agent Tutor",
+        "text": "A multi-agent educational system might include: a Content Agent that delivers course material, a Quiz Agent that creates and grades assessments, a Progress Agent that tracks learning, and a Mentor Agent that provides guidance. Each agent specializes in its domain but can hand off to others when needed. The student experiences a seamless tutoring experience while specialized agents handle different aspects.",
+        "key_points": ["Specialized agents for different tasks", "Seamless handoffs between agents", "Each agent excels in its domain", "Creates comprehensive tutoring experience"]
+      }
+    ],
+    "order": 6,
+    "is_premium": true,
+    "prerequisites": ["ch1", "ch2", "ch3", "ch4", "ch5"]
+  },
+  {
+    "chapter_id": "ch7",
+    "title": "MCP (Model Context Protocol)",
+    "description": "Understand the Model Context Protocol for connecting AI models to external data and tools.",
+    "content": [
+      {
+        "section": "What is MCP?",
+        "text": "The Model Context Protocol (MCP) is an open standard that enables AI models to securely connect to external data sources and tools. It provides a universal interface for agents to access files, databases, APIs, and other resources without custom integrations for each source. MCP separates the agent's reasoning capabilities from its access to external systems, making agents more modular and interoperable.",
+        "key_points": ["Open standard for AI connectivity", "Universal interface for data/tools", "Separates reasoning from access", "Enables modular, interoperable agents"]
+      },
+      {
+        "section": "MCP Architecture",
+        "text": "MCP follows a client-server architecture where the MCP client runs in the agent and MCP servers expose specific capabilities. Each MCP server provides resources (data sources), tools (actions), and prompts (templates). The agent discovers available capabilities and uses them as needed. This architecture enables a rich ecosystem where anyone can build MCP servers for their data sources, and any MCP-compatible agent can use them.",
+        "code_examples": [
+          {"language": "python", "code": "# MCP Server example\nfrom mcp.server import Server\n\nserver = Server(\"documentation-server\")\n\n@server.resource(\"doc://{article_id}\")\nasync def get_article(article_id: str) -> str:\n    return await load_article(article_id)\n\n@server.tool(\"search_docs\")\nasync def search_docs(query: str) -> list:\n    return await search_index(query)"}
+        ],
+        "key_points": ["Client-server architecture", "Servers expose resources, tools, prompts", "Agents discover capabilities dynamically", "Enables rich ecosystem"]
+      },
+      {
+        "section": "Building MCP Servers",
+        "text": "Building an MCP server involves defining what resources and tools you want to expose, implementing the handlers for each, and running the server. MCP servers can wrap existing APIs, databases, file systems, or any other data source. The key is to provide clear descriptions and schemas so agents can understand and use your server effectively. MCP servers are the bridge between your data and AI agents.",
+        "key_points": ["Define resources and tools to expose", "Implement handlers", "Provide clear descriptions", "Bridge between data and agents"]
+      },
+      {
+        "section": "MCP in Education",
+        "text": "In educational contexts, MCP servers can expose: course content repositories, quiz databases, student progress tracking systems, grading systems, and learning analytics. An AI tutor with MCP access can pull relevant content, create personalized quizzes, track progress, and adapt to student needs - all through standardized interfaces. This makes the tutor more capable and easier to extend.",
+        "key_points": ["Expose course content via MCP", "Access quiz databases", "Track student progress", "Adapt to student needs"]
+      }
+    ],
+    "order": 7,
+    "is_premium": true,
+    "prerequisites": ["ch1", "ch2", "ch3", "ch4", "ch5", "ch6"]
+  },
+  {
+    "chapter_id": "ch8",
+    "title": "Agent Evaluation and Testing",
+    "description": "Learn how to evaluate agent performance and ensure reliability.",
+    "content": [
+      {
+        "section": "Why Evaluate Agents?",
+        "text": "Unlike traditional software with deterministic outputs, agents produce variable responses based on LLM behavior. This makes evaluation critical for ensuring quality, consistency, and safety. Without proper evaluation, agents may produce incorrect information, behave inconsistently, or fail in edge cases. Systematic evaluation helps identify these issues before they affect users.",
+        "key_points": ["Agents produce variable outputs", "Evaluation ensures quality", "Identifies edge case failures", "Critical for user trust"]
+      },
+      {
+        "section": "Evaluation Metrics",
+        "text": "Agent evaluation uses multiple metrics: Accuracy (correctness of responses), Consistency (same answer for same question), Completeness (covers all relevant aspects), Helpfulness (actually assists the user), and Safety (avoids harmful content). For educational agents, additional metrics include pedagogical effectiveness (does the student learn?) and engagement (does the student stay motivated?).",
+        "key_points": ["Accuracy: Correctness", "Consistency: Same answer for same input", "Completeness: Coverage", "Helpfulness: User assistance", "Safety: Avoid harm"]
+      },
+      {
+        "section": "Testing Strategies",
+        "text": "Agent testing combines automated and manual approaches. Unit tests verify individual tool implementations. Integration tests check agent-tool interactions. Scenario tests evaluate end-to-end workflows. Red teaming tests for safety and robustness. A/B tests compare different agent configurations. For educational agents, student learning outcomes provide the ultimate evaluation metric.",
+        "key_points": ["Unit tests for tools", "Integration tests for interactions", "Scenario tests for workflows", "Red teaming for safety", "Learning outcomes as ultimate metric"]
+      },
+      {
+        "section": "Continuous Monitoring",
+        "text": "Production agents need continuous monitoring to detect performance degradation, emerging failure modes, and changing user needs. Key monitoring includes: response quality scores, user satisfaction ratings, error rates, cost per interaction, and learning outcome metrics. Set up alerts for anomalies and regularly review agent behavior to maintain quality.",
+        "key_points": ["Monitor response quality", "Track user satisfaction", "Watch for anomalies", "Review regularly"]
+      }
+    ],
+    "order": 8,
+    "is_premium": true,
+    "prerequisites": ["ch1", "ch2", "ch3", "ch4", "ch5"]
+  },
+  {
+    "chapter_id": "ch9",
+    "title": "Building Production-Ready Agents",
+    "description": "Learn best practices for deploying agents in production environments.",
+    "content": [
+      {
+        "section": "Production Architecture",
+        "text": "Production agent systems require robust architecture: API gateways for routing, load balancers for scaling, caching for performance, databases for persistence, monitoring for observability, and error handling for reliability. The Zero-Backend-LLM architecture we use in Phase 1 simplifies this significantly since the backend only handles deterministic operations. As you add hybrid features, the architecture grows in complexity.",
+        "key_points": ["API gateways for routing", "Load balancers for scaling", "Caching for performance", "Monitoring for observability", "Error handling for reliability"]
+      },
+      {
+        "section": "Error Handling and Recovery",
+        "text": "Agents must handle failures gracefully: API timeouts, rate limits, invalid responses, and unexpected errors. Implement retry logic with exponential backoff, fallback behaviors when tools fail, circuit breakers to prevent cascading failures, and clear error messages for users. For educational agents, never lose student progress due to errors.",
+        "key_points": ["Retry with exponential backoff", "Fallback behaviors", "Circuit breakers", "Never lose student progress"]
+      },
+      {
+        "section": "Security Considerations",
+        "text": "Agent security involves multiple layers: input validation to prevent prompt injection, output filtering to prevent harmful content, access control for sensitive operations, rate limiting to prevent abuse, and audit logging for accountability. Agents that can execute code or access external systems need additional sandboxing and permission controls.",
+        "key_points": ["Prevent prompt injection", "Filter harmful output", "Control access", "Rate limit", "Audit log"]
+      },
+      {
+        "section": "Scaling Strategies",
+        "text": "Scaling agent systems involves both horizontal scaling (more instances) and vertical scaling (more capable models). Use connection pooling for database access, caching for repeated queries, async processing for long-running tasks, and queue-based architectures for handling variable load. The Zero-Backend-LLM architecture scales exceptionally well since the backend has no LLM costs.",
+        "key_points": ["Horizontal and vertical scaling", "Connection pooling", "Caching", "Async processing", "Queue-based architectures"]
+      }
+    ],
+    "order": 9,
+    "is_premium": true,
+    "prerequisites": ["ch1", "ch2", "ch3", "ch4", "ch5", "ch6", "ch7", "ch8"]
+  },
+  {
+    "chapter_id": "ch10",
+    "title": "The Future of AI Agents",
+    "description": "Explore emerging trends and the future landscape of AI agent technology.",
+    "content": [
+      {
+        "section": "Emerging Trends",
+        "text": "The AI agent landscape is evolving rapidly. Key trends include: autonomous agents that can plan and execute multi-day tasks, multi-modal agents that process text, images, audio, and video, embodied agents that interact with physical environments, and agent ecosystems where specialized agents collaborate. The line between tool and agent is blurring as more software becomes AI-powered.",
+        "key_points": ["Autonomous multi-day planning", "Multi-modal processing", "Physical environment interaction", "Agent ecosystems", "AI-powered software"]
+      },
+      {
+        "section": "Agents in Education",
+        "text": "AI agents are transforming education through personalized tutoring at scale, adaptive curricula that adjust to each student, automated assessment with detailed feedback, 24/7 availability, and multi-language support. The Course Companion FTE we're building represents this future - a digital tutor that works 168 hours per week at a fraction of the cost of human tutoring.",
+        "key_points": ["Personalized tutoring at scale", "Adaptive curricula", "Automated assessment", "24/7 availability", "Multi-language support"]
+      },
+      {
+        "section": "Ethical Considerations",
+        "text": "As agents become more capable, ethical considerations grow in importance: ensuring fairness across demographics, preventing bias in educational content, maintaining transparency about AI limitations, protecting student privacy, and ensuring human oversight for critical decisions. Responsible agent development requires ongoing attention to these issues.",
+        "key_points": ["Ensure fairness", "Prevent bias", "Maintain transparency", "Protect privacy", "Human oversight"]
+      },
+      {
+        "section": "Getting Started",
+        "text": "The best way to learn about AI agents is to build them. Start with simple single-agent applications, add tools gradually, experiment with different prompting strategies, evaluate rigorously, and iterate based on user feedback. The Course Companion FTE you've built through this hackathon is a solid foundation - extend it, experiment with it, and use it as a launchpad for your own agent projects.",
+        "key_points": ["Start simple", "Add tools gradually", "Experiment with prompting", "Evaluate rigorously", "Iterate based on feedback"]
+      }
+    ],
+    "order": 10,
+    "is_premium": true,
+    "prerequisites": ["ch1", "ch2", "ch3", "ch4", "ch5", "ch6", "ch7", "ch8", "ch9"]
+  }
+]

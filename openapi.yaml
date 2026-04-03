@@ -1,0 +1,368 @@
+openapi: 3.1.0
+info:
+  title: Course Companion FTE API
+  description: |
+    API for the Course Companion FTE - a Digital Full-Time Equivalent Educational Tutor.
+    
+    ## Architecture
+    - **Phase 1**: Zero-Backend-LLM (deterministic only)
+    - **Phase 2**: Hybrid Intelligence (selective LLM for premium)
+    - **Phase 3**: Consolidated (all features)
+    
+    ## Zero-Backend-LLM Guarantee
+    Phase 1 backend makes ZERO LLM API calls. All intelligent work happens in ChatGPT.
+  version: "1.0.0"
+  contact:
+    name: Panaversity Agent Factory
+servers:
+  - url: http://localhost:8000
+    description: Local development
+  - url: https://api.course-companion.example.com
+    description: Production
+
+paths:
+  /api/v1/chapters/:
+    get:
+      summary: List all chapters
+      tags: [chapters]
+      responses:
+        '200':
+          description: List of all course chapters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chapter'
+
+  /api/v1/chapters/{chapter_id}:
+    get:
+      summary: Get specific chapter content
+      tags: [chapters]
+      parameters:
+        - name: chapter_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Chapter content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Chapter not found
+
+  /api/v1/chapters/{chapter_id}/navigation:
+    get:
+      summary: Get chapter navigation (previous/next)
+      tags: [chapters]
+      parameters:
+        - name: chapter_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Navigation info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChapterNavigation'
+
+  /api/v1/quizzes/:
+    get:
+      summary: List all quizzes
+      tags: [quizzes]
+      responses:
+        '200':
+          description: List of all quizzes
+
+  /api/v1/quizzes/{quiz_id}:
+    get:
+      summary: Get specific quiz
+      tags: [quizzes]
+      parameters:
+        - name: quiz_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Quiz with questions
+        '404':
+          description: Quiz not found
+
+  /api/v1/quizzes/{quiz_id}/submit:
+    post:
+      summary: Submit quiz answers and get results
+      tags: [quizzes]
+      parameters:
+        - name: quiz_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                answers:
+                  type: object
+                  additionalProperties:
+                    type: integer
+      responses:
+        '200':
+          description: Quiz results with score and feedback
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizResult'
+
+  /api/v1/progress/{user_id}:
+    get:
+      summary: Get user's learning progress
+      tags: [progress]
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User progress data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProgress'
+    put:
+      summary: Update user's learning progress
+      tags: [progress]
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chapter_id:
+                  type: string
+                completed:
+                  type: boolean
+                time_spent:
+                  type: integer
+                score:
+                  type: number
+      responses:
+        '200':
+          description: Updated progress
+
+  /api/v1/access/check:
+    post:
+      summary: Check if user has access to a chapter
+      tags: [access]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                chapter_id:
+                  type: string
+      responses:
+        '200':
+          description: Access check result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessResponse'
+
+  /api/v1/search/:
+    get:
+      summary: Search course content
+      tags: [search]
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+
+  /api/v1/hybrid/feature:
+    post:
+      summary: Access hybrid intelligence feature (Phase 2, Premium only)
+      tags: [hybrid]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                feature:
+                  type: string
+                  enum: [adaptive_path, llm_assessment]
+                data:
+                  type: object
+      responses:
+        '200':
+          description: Hybrid feature result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HybridFeatureResponse'
+        '403':
+          description: Feature requires Phase 2 or Premium tier
+
+components:
+  schemas:
+    Chapter:
+      type: object
+      properties:
+        chapter_id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        content:
+          type: array
+          items:
+            type: object
+            properties:
+              section:
+                type: string
+              text:
+                type: string
+              code_examples:
+                type: array
+                items:
+                  type: object
+              key_points:
+                type: array
+                items:
+                  type: string
+        order:
+          type: integer
+        is_premium:
+          type: boolean
+        prerequisites:
+          type: array
+          items:
+            type: string
+
+    ChapterNavigation:
+      type: object
+      properties:
+        current:
+          $ref: '#/components/schemas/Chapter'
+        previous:
+          $ref: '#/components/schemas/Chapter'
+        next:
+          $ref: '#/components/schemas/Chapter'
+
+    QuizResult:
+      type: object
+      properties:
+        quiz_id:
+          type: string
+        score:
+          type: number
+        passed:
+          type: boolean
+        total_questions:
+          type: integer
+        correct_answers:
+          type: integer
+        feedback:
+          type: object
+          additionalProperties:
+            type: string
+
+    UserProgress:
+      type: object
+      properties:
+        user_id:
+          type: string
+        total_chapters:
+          type: integer
+        completed_chapters:
+          type: integer
+        completion_percentage:
+          type: number
+        current_streak:
+          type: integer
+        total_streak:
+          type: integer
+        quiz_scores:
+          type: array
+          items:
+            type: object
+        chapters:
+          type: array
+          items:
+            type: object
+
+    AccessResponse:
+      type: object
+      properties:
+        has_access:
+          type: boolean
+        tier:
+          type: string
+        chapter_id:
+          type: string
+        is_premium:
+          type: boolean
+        message:
+          type: string
+
+    SearchResponse:
+      type: object
+      properties:
+        query:
+          type: string
+        results:
+          type: array
+          items:
+            type: object
+        total_results:
+          type: integer
+
+    HybridFeatureResponse:
+      type: object
+      properties:
+        feature:
+          type: string
+        result:
+          type: object
+        cost:
+          type: number
+        tokens_used:
+          type: integer
