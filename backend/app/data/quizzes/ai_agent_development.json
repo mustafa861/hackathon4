@@ -205,5 +205,86 @@
     ],
     "passing_score": 66.0,
     "is_premium": true
+  },
+  {
+    "quiz_id": "quiz_ch8",
+    "chapter_id": "ch8",
+    "title": "Agent Evaluation and Testing - Quiz",
+    "questions": [
+      {
+        "question": "Why is agent evaluation critical?",
+        "options": ["Agents are expensive", "Agents produce variable outputs unlike deterministic software", "Agents are slow", "Agents need more memory"],
+        "correct_answer": 1,
+        "explanation": "Unlike traditional software with deterministic outputs, agents produce variable responses based on LLM behavior, making evaluation critical."
+      },
+      {
+        "question": "Which metric measures whether an agent gives the same answer for the same question?",
+        "options": ["Accuracy", "Consistency", "Completeness", "Helpfulness"],
+        "correct_answer": 1,
+        "explanation": "Consistency measures whether the agent produces the same answer when given the same input."
+      },
+      {
+        "question": "What is the ultimate evaluation metric for educational agents?",
+        "options": ["Response speed", "Student learning outcomes", "Token usage", "Number of tools used"],
+        "correct_answer": 1,
+        "explanation": "For educational agents, student learning outcomes provide the ultimate evaluation metric."
+      }
+    ],
+    "passing_score": 66.0,
+    "is_premium": true
+  },
+  {
+    "quiz_id": "quiz_ch9",
+    "chapter_id": "ch9",
+    "title": "Building Production-Ready Agents - Quiz",
+    "questions": [
+      {
+        "question": "What does the Zero-Backend-LLM architecture simplify?",
+        "options": ["The frontend", "Production infrastructure since backend only handles deterministic operations", "The database", "The LLM model"],
+        "correct_answer": 1,
+        "explanation": "Zero-Backend-LLM simplifies production architecture since the backend only handles deterministic operations with no LLM costs."
+      },
+      {
+        "question": "What retry strategy is recommended for handling API failures?",
+        "options": ["Immediate retry", "Exponential backoff", "No retry", "Random delay"],
+        "correct_answer": 1,
+        "explanation": "Retry with exponential backoff is the recommended strategy for handling API timeouts and rate limits."
+      },
+      {
+        "question": "What security concern involves preventing malicious prompts from manipulating agent behavior?",
+        "options": ["SQL injection", "Prompt injection", "XSS", "CSRF"],
+        "correct_answer": 1,
+        "explanation": "Prompt injection is a security concern where malicious inputs attempt to manipulate the agent's behavior."
+      }
+    ],
+    "passing_score": 66.0,
+    "is_premium": true
+  },
+  {
+    "quiz_id": "quiz_ch10",
+    "chapter_id": "ch10",
+    "title": "The Future of AI Agents - Quiz",
+    "questions": [
+      {
+        "question": "Which trend involves agents that process text, images, audio, and video together?",
+        "options": ["Autonomous agents", "Multi-modal agents", "Embodied agents", "Agent ecosystems"],
+        "correct_answer": 1,
+        "explanation": "Multi-modal agents process multiple types of input: text, images, audio, and video."
+      },
+      {
+        "question": "What is a key ethical consideration for AI agents in education?",
+        "options": ["Maximizing profit", "Ensuring fairness across demographics", "Minimizing server costs", "Increasing token usage"],
+        "correct_answer": 1,
+        "explanation": "Ensuring fairness across demographics is a critical ethical consideration for AI agents in education."
+      },
+      {
+        "question": "What is the best way to learn about AI agents?",
+        "options": ["Read books only", "Build them - start simple and iterate", "Watch videos", "Attend conferences"],
+        "correct_answer": 1,
+        "explanation": "The best way to learn is to build - start with simple agents, add tools gradually, and iterate based on feedback."
+      }
+    ],
+    "passing_score": 66.0,
+    "is_premium": true
   }
 ]

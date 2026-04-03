@@ -3,6 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.models import User, Progress, QuizAttempt
 from app.schemas.schemas import UserProgress, ProgressResponse
+from app.services.content_service import load_course_content
 from datetime import datetime, timedelta
 
 class ProgressService:
@@ -31,9 +32,9 @@ class ProgressService:
         if completed:
             progress.completed = True
         if time_spent > 0:
-            progress.time_spent += time_spent
+            progress.time_spent = (progress.time_spent or 0) + time_spent
         if score > 0:
-            progress.score = max(progress.score, score)
+            progress.score = max(progress.score or 0, score)
         
         progress.last_accessed = datetime.utcnow()
         await db.commit()
@@ -45,7 +46,8 @@ class ProgressService:
         result = await db.execute(select(Progress).where(Progress.user_id == user_id))
         progress_records = result.scalars().all()
         
-        total_chapters = 10
+        chapters_data = load_course_content()
+        total_chapters = len(chapters_data)
         completed_chapters = sum(1 for p in progress_records if p.completed)
         completion_percentage = (completed_chapters / total_chapters * 100) if total_chapters > 0 else 0
         
