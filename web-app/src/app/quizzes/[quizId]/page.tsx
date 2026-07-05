@@ -122,10 +122,10 @@ export default function QuizDetailPage() {
             </div>
 
             <div className="space-y-6">
-              {Object.entries(results.feedback).map(([qId, feedback]) => (
-                <div key={qId} className={`p-4 rounded-lg ${feedback.toString().startsWith('Correct') ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}>
+              {Object.entries(results.feedback as Record<string, string>).map(([qId, feedback]) => (
+                <div key={qId} className={`p-4 rounded-lg ${feedback.startsWith('Correct') ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}>
                   <p className="font-medium text-gray-900">{quiz.questions[parseInt(qId.replace('q', '')) - 1]?.question}</p>
-                  <p className={`mt-2 ${feedback.toString().startsWith('Correct') ? 'text-green-700' : 'text-red-700'}`}>{feedback as string}</p>
+                  <p className={`mt-2 ${feedback.startsWith('Correct') ? 'text-green-700' : 'text-red-700'}`}>{feedback}</p>
                 </div>
               ))}
             </div>
